@@ -17,6 +17,7 @@ import UserRouter from '../service/routes/userRouter';
 import ProductModel from '../data/models/productModel';
 import ProductController from '../service/controllers/productController';
 import ProductRouter from '../service/routes/productRouter';
+import ProductService from '../service/productService';
 
 
 import RoleModel from '../data/models/roleModel';
@@ -39,7 +40,9 @@ export default async function (logger,
 
 
   const productRepository = new ModelOfTRepository(ProductModel(dbConnection));
-  const productController = new ProductController(productRepository, logger);
+  const productService = new ProductService(productRepository);
+
+  const productController = new ProductController(productRepository,productService, logger);
   const productRouter = new ProductRouter(productController);
 
   const roleRepository = new ModelOfTRepository(RoleModel(dbConnection));

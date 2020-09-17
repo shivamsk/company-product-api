@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import {Schema} from 'mongoose';
 
 const ProductSchema = new Schema({
   name: {
@@ -15,6 +15,10 @@ const ProductSchema = new Schema({
     type: String,
     required: true,
     maxLength: 512
+  },
+  isDeleted: {
+    type: Boolean,
+    required: true
   }
 });
 

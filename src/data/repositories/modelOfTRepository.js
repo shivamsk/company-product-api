@@ -21,6 +21,7 @@ class ModelOfTRepository extends RepositoryOfT {
     return this.Model.find(query);
   }
 
+
   async count (query) {
     return this.Model.count(query);
   }
@@ -54,7 +55,7 @@ class ModelOfTRepository extends RepositoryOfT {
   }
 
   async upsert (find, update) {
-    return this.Model.findOneAndUpdate(find, update, { upsert: true });
+    return this.Model.findOneAndUpdate(find, update, { upsert: true, useFindAndModify: false ,returnOriginal: false});
   }
 
   async create (entity) {
