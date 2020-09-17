@@ -34,7 +34,8 @@ export const getToken = (user) => {
     sub: user.userName,
     name: user.name,
     iss: 'one-identity',
-    aud: 'stringbees-core'
+    aud: 'stringbees-core',
+    role: user.role,
   };
   const token = jwt.sign(payload, 'stringbees-secret');
   return token;

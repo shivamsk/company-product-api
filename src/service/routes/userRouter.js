@@ -1,5 +1,6 @@
 import BaseRouter from './baseRouter';
-//import { authenticated } from '../middleware/middleware-security';
+import {authenticated, checkIsInRole} from '../middleware/middleware-security';
+import {ROLES} from '../../common/constants/roles';
 
 class UserRouter extends BaseRouter {
   constructor(userController) {
@@ -20,9 +21,8 @@ class UserRouter extends BaseRouter {
     this.Router.route('/signin')
         .post(async (req, res) => this.Controller.signIn(req, res));
 
-
-    this.Router.route('/protected')
-        .post(async (req, res) => this.Controller.protectedResource(req, res));
+    this.Router.route('/protected').all(authenticated(), checkIsInRole(ROLES.ADMIN))
+        .get(async (req, res) => this.Controller.protectedResource(req, res));
 
   }
 }

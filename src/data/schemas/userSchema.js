@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import {Schema} from 'mongoose';
 
 const UserSchema = new Schema({
   name: {
@@ -12,6 +12,11 @@ const UserSchema = new Schema({
     maxLength: 512
   },
   password: {
+    type: String,
+    required: true,
+    maxLength: 512
+  },
+  role: {
     type: String,
     required: true,
     maxLength: 512

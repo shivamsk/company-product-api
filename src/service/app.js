@@ -1,19 +1,18 @@
 import express from 'express';
-// import middlewareLogging from './middleware/middleware-logger';
+import middlewareLogging from './middleware/middleware-logger';
 import middlewarePassport from './middleware/middleware-passport';
 import middlewareRequestParser from './middleware/middleware-request-parser';
 
-// #region Common components
+//  Common components
 import ModelOfTRepository from '../data/repositories/modelOfTRepository';
 // import middlewareCors from './middleware/middleware-cors';
-// #endregion
 
-// #region User
+// User
 import UserModel from '../data/models/userModel';
 import UserController from '../service/controllers/userController';
 import UserRouter from '../service/routes/userRouter';
 
-// #region Product
+// Product
 import ProductModel from '../data/models/productModel';
 import ProductController from '../service/controllers/productController';
 import ProductRouter from '../service/routes/productRouter';
@@ -51,7 +50,7 @@ export default async function (logger,
 
 
 
-  // middlewareLogging(app, logger);
+  middlewareLogging(app, logger);
   middlewareRequestParser(app);
   middlewarePassport(app, userRepository, securityConfig);
   // middlewareCors(app, corsConfig);
@@ -62,13 +61,6 @@ export default async function (logger,
   apiRouter.use('/product', authenticated(),productRouter.Router);
 
   app.use('/api', apiRouter);
-
-  // const productRouterMain = express.Router();
-  //
-  // productRouterMain.use('/product', authenticated(), productRouter.Router);
-  //
-  // app.use('/dpi', productRouterMain);
-
 
 
   // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

@@ -13,6 +13,10 @@ class ProductController extends ApiController {
     return this._productRepository;
   }
 
+  get Logger() {
+    return this._logger;
+  }
+
 
   async create(req, res) {
     try {
@@ -30,8 +34,8 @@ class ProductController extends ApiController {
   async get(req, res) {
     try {
 
-      console.log("#######Product Params : " + JSON.stringify(req.params));
-
+      // console.log("#######Product Params : " + JSON.stringify(req.params));
+      this.Logger.info("Using Logger#######Product Params : " + JSON.stringify(req.params));
       //const products = await this._productRepository.get({sellerId: req.user._id});
       const products = await this._productService.getProducts(req);
       this.httpOk(res, products);
@@ -48,7 +52,7 @@ class ProductController extends ApiController {
 
       //const products = await this._productRepository.get({sellerId: req.user._id});
       const product = await this._productService.getProducts(req);
-      console.log("Product Found "+ typeof (product) );
+      console.log("Product Found " + typeof (product));
       if (!product) {
         this.httpNotFound(res, product);
       }
