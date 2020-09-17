@@ -1,0 +1,20 @@
+
+# compiled output
+/dist
+/dist-server
+
+# IDEs and editors
+/.idea
+
+# dotenv environment variables file
+.env
+
+
+# Dependency directories
+node_modules/
+
+public/
+
+# Logs
+logs
+*.log
