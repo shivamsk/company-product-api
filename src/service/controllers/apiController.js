@@ -2,6 +2,7 @@ import * as HttpStatus from '../../common/lib/httpStatusCodes';
 class ApiController {
   constructor() {
   }
+
   httpCreated(response, data) {
     this.sendResponse(response, HttpStatus.Created, data);
   }
@@ -11,7 +12,7 @@ class ApiController {
   }
 
   httpInternalServerError(response, data) {
-    this.sendResponse(response, HttpStatus.InternalServerError, data);
+    this.sendErrorResponse(response, HttpStatus.InternalServerError, data);
   }
 
   httpNotFound(response, data) {
@@ -31,7 +32,17 @@ class ApiController {
   }
 
   sendResponse(response, code, data) {
-    return response.status(code).json(data);
+    return response.status(code).json({
+      body: data
+    });
+  }
+
+  sendErrorResponse(response, code, error) {
+    return response.status(code).json({
+      error: {
+        message: error.message
+      }
+    });
   }
 }
 

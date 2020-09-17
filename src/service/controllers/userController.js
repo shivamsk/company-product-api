@@ -40,10 +40,12 @@ class UserController extends ApiController {
         const token = getToken(user);
         this.httpOk(res, Object.assign({}, user.toJSON(), { token, password: null }));
       } else {
-        this.httpNotFound(res, 'User not active/registered/wrong password');
+        // this.httpNotFound(res, 'User not active/registered/wrong password');
+        throw new Error("User wrong password");
       }
     } catch (error) {
-      this.httpInternalServerError(res, error.message);
+      this.httpInternalServerError(res, error);
+      // throw error;
     }
   }
 

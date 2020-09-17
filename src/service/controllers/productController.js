@@ -17,7 +17,6 @@ class ProductController extends ApiController {
     return this._logger;
   }
 
-
   async create(req, res) {
     try {
 

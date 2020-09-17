@@ -62,6 +62,16 @@ export default async function (logger,
 
   app.use('/api', apiRouter);
 
+  app.use((error, req, res, next) => {
+    console.log("ERRRORR USEE ");
+    res.status(error.status || 500);
+    res.json({
+      error: {
+        message: error.message
+      }
+    });
+  });
+
 
   // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   return app;

@@ -9,17 +9,17 @@ export const checkIsInRole = (...roles) => (req, res, next) => {
 
   console.log("checkIsInRole "  + JSON.stringify(req.user));
   if (!req.user) {
-    console.log("No Role Specified");
-    throw new Error("No Role Specified");
-  }
+    return res.status(401).json({
+      messsage: "Invalid Credentials"
+    });  }
 
   console.log(" ROles " + roles);
   const hasRole = roles.find(role => req.user.role === role)
   if (!hasRole) {
-    console.log("User has no Role");
-
-    // return new Error("No Role Specified");
-    return res.send("You need to sign in ");
+    // return res.send("You need to sign in ");
+    return res.status(403).json({
+      messsage: "User does not have access to this API"
+    });
   }
 
   return next()
