@@ -58,7 +58,7 @@ class ModelOfTRepository extends RepositoryOfT {
   }
 
   async create (entity) {
-    console.log("#######USER Repository : " + JSON.stringify(entity));
+    console.log("####### Repository : " + JSON.stringify(entity));
 
     const newEntity = new (this.Model)(entity);
     return newEntity.save();

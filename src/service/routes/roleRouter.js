@@ -1,13 +1,8 @@
 import BaseRouter from './baseRouter';
-//import { authenticated } from '../middleware/middleware-security';
 
 class RoleRouter extends BaseRouter {
-  constructor (
-
-      roleController
-  ) {
+  constructor(roleController) {
     super(roleController);
-
 
     this.Router.route('/')
         .post(async (req, res) => {
@@ -17,7 +12,7 @@ class RoleRouter extends BaseRouter {
           return response;
         });
 
+
   }
 }
-
 export default RoleRouter;

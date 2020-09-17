@@ -15,5 +15,4 @@ class ProductRouter extends BaseRouter {
 
   }
 }
-
 export default ProductRouter;
