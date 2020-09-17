@@ -59,14 +59,15 @@ export default async function (logger,
   const apiRouter = express.Router();
   apiRouter.use('/user', userRouter.Router);
   apiRouter.use('/role', roleRouter.Router);
+  apiRouter.use('/product', productRouter.Router);
 
   app.use('/api', apiRouter);
 
-  const productRouterMain = express.Router();
-
-  productRouterMain.use('/product', authenticated(), productRouter.Router);
-
-  app.use('/dpi', productRouterMain);
+  // const productRouterMain = express.Router();
+  //
+  // productRouterMain.use('/product', authenticated(), productRouter.Router);
+  //
+  // app.use('/dpi', productRouterMain);
 
 
 
