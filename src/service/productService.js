@@ -1,47 +1,71 @@
 class ProductService {
   constructor(productRepository) {
-    this._productRepository = productRepository;
+    this.productRepository = productRepository;
   }
 
-  async getProducts(req) {
+  async getProductsByQueryParam(req) {
+
     const query = {
+      // eslint-disable-next-line
       sellerId: req.user._id,
       isDeleted: false,
     };
-    if (req.query && req.query.page) {
-      const perPage = 2;
-      const page = req.query.page > 0 ? req.query.page : 0;
 
-      // req.params.sellerId = req.user._id;
-      const products = await this._productRepository.getByPage({
-        sellerId: req.user._id,
-        isDeleted: false,
-      }, 'name', perPage * page, perPage);
-
-      return products;
-    } if (req.query && req.query.category) {
-      query.category = req.query.category;
-      const products = await this._productRepository.getWithParent(query, 'category', 'name -_id');
+    if (req.query && req.query.categoryId) {
+      query.category = req.query.categoryId;
+      const products = await this.productRepository.getWithParent(query, 'category', 'name -_id');
       return products;
     }
 
-    if (req.params) {
-      let product = {};
-      const query = {
+    if (req.query) {
+      const perPage = 10;
+      const page = req.query.page > 0 ? req.query.page : 0;
+      const products = await this.productRepository.getByPageWithParent({
+        // eslint-disable-next-line
         sellerId: req.user._id,
         isDeleted: false,
-      };
+      }, 'name', perPage * page, perPage, 'category', 'name -_id');
+
+      return products;
+    }
+
+    return [];
+  }
+
+  async getProductsByPathParam(req) {
+    const query = {
+      // eslint-disable-next-line
+      sellerId: req.user._id,
+      isDeleted: false,
+    };
+
+    if (req.params) {
       if (req.params.productId) {
+        // eslint-disable-next-line
         query._id = req.params.productId;
-      } else if (req.params.category) {
-        query.category = req.params.category;
-        product = await this._productRepository.getWithParent(query, 'category', 'name -_id');
       }
+      // eslint-disable-next-line
+      // const product = await this.productRepository.getWithParent(query,
+      //     'category', 'name -_id');
+      const product = await this.productRepository.getByPageWithParent(query,
+          'name', 0, 1, 'category', 'name -_id');
 
       return product;
     }
 
-    return [];
+    return null;
+  }
+
+  async findProduct(req) {
+    const query = {
+      // eslint-disable-next-line
+      sellerId: req.user._id,
+      isDeleted: false,
+      // eslint-disable-next-line
+      _id: req.params.productId
+    };
+    const product = await this.productRepository.findOne(query);
+    return product;
   }
 }
 

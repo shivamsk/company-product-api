@@ -1,6 +1,7 @@
 import passport from 'passport';
 import { ExtractJwt, Strategy as JWTStrategy } from 'passport-jwt';
 import jwt from 'jsonwebtoken';
+import securityConfiguration from '../../../config/development/security.json';
 
 export default function (app, userRepository, securityConfig) {
   passport.use(new JWTStrategy({
@@ -29,9 +30,9 @@ export const getToken = (user) => {
     sub: user.userName,
     name: user.name,
     iss: 'one-identity',
-    aud: 'stringbees-core',
+    aud: 'audience-core',
     role: user.role,
   };
-  const token = jwt.sign(payload, 'stringbees-secret');
+  const token = jwt.sign(payload, securityConfiguration.jwt.secret);
   return token;
 };

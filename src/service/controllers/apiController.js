@@ -1,7 +1,8 @@
 import * as HttpStatus from '../../common/httpStatusCodes';
 
 class ApiController {
-  constructor() {
+  constructor(logger) {
+    this.logger = logger;
   }
 
   httpCreated(response, data) {
@@ -20,16 +21,16 @@ class ApiController {
     this.sendResponse(response, HttpStatus.NotFound, data);
   }
 
-  httpNotContent(response) {
-    return response.status(HttpStatus.NoContent).end();
-  }
-
   httpBadRequest(response, data) {
-    this.sendResponse(response, HttpStatus.BadRequest, data);
+    this.sendErrorResponse(response, HttpStatus.BadRequest, data);
   }
 
   httpUnauthorized(response, data) {
-    this.sendResponse(response, HttpStatus.Unauthorized, data);
+    this.sendErrorResponse(response, HttpStatus.Unauthorized, data);
+  }
+
+  httpForbideen(response, data) {
+    this.sendErrorResponse(response, HttpStatus.Forbidden, data);
   }
 
   sendResponse(response, code, data) {
@@ -39,6 +40,8 @@ class ApiController {
   }
 
   sendErrorResponse(response, code, error) {
+    this.logger.error(`error : ${JSON.stringify(error)}`);
+
     return response.status(code).json({
       error: {
         message: error.message,

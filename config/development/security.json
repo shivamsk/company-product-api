@@ -1,7 +1,7 @@
 {
     "jwt": {
-        "secret": "stringbees-secret",
+        "secret": "tempSecretKey",
         "issuer": "one-identity",
-        "audience": "stringbees-core"
+        "audience": "audience-core"
     }
 }

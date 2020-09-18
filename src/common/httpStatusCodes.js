@@ -27,7 +27,6 @@ export const Created = 201;
  */
 export const Forbidden = 403;
 
-
 /**
  * InternalServerError indicates that a generic error has occurred on the
  * server.
@@ -48,3 +47,4 @@ export const OK = 200;
  * PartialContent indicates that the response is a partial response as
  * requested by a GET request that includes a byte range.
  */
+export const Unauthorized = 401;

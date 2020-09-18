@@ -13,7 +13,7 @@ class RoleController extends ApiController {
 
   async create(req, res) {
     try {
-      console.log(`#######Role Controller : ${req}`);
+      this.logger.info(`RoleController : ${req}`);
 
       const role = await this.roleRepository.create(req.body);
       this.httpCreated(res, { ...role.toJSON() });

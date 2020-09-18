@@ -26,7 +26,6 @@ import CategoryModel from '../data/models/categoryModel';
 import CategoryController from './controllers/categoryController';
 import CategoryRouter from './routes/categoryRouter';
 
-
 export default async function (logger,
   dbConnection,
   securityConfig) {
@@ -56,20 +55,20 @@ export default async function (logger,
 
   const apiRouter = express.Router();
   apiRouter.use('/user', userRouter.Router);
-  apiRouter.use('/role', authenticated(),roleRouter.Router);
+  apiRouter.use('/role', authenticated(), roleRouter.Router);
   apiRouter.use('/product', authenticated(), productRouter.Router);
   apiRouter.use('/category', authenticated(), categoryRouter.Router);
 
   app.use('/api', apiRouter);
 
-  app.use((error, req, res, next) => {
-    res.status(error.status || 500);
-    res.json({
-      error: {
-        message: error.message,
-      },
-    });
-  });
+  // app.use((error, req, res, next) => {
+  //   res.status(error.status || 500);
+  //   res.json({
+  //     error: {
+  //       message: error.message,
+  //     },
+  //   });
+  // });
 
   return app;
 }

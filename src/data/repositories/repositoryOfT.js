@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 class RepositoryOfT {
   constructor(model) {
     this.model = model;

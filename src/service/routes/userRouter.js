@@ -7,18 +7,10 @@ class UserRouter extends BaseRouter {
     super(userController);
 
     this.Router.route('/')
-      .post(async (req, res) => {
-        console.log(`#######USER Router : ${JSON.stringify(req.body)}`);
-
-        const response = await this.Controller.create(req, res);
-        return response;
-      });
+      .post(async (req, res) => this.Controller.create(req, res));
 
     this.Router.route('/signin')
       .post(async (req, res) => this.Controller.signIn(req, res));
-
-    this.Router.route('/protected').all(authenticated(), checkIsInRole(ROLES.ADMIN))
-      .get(async (req, res) => this.Controller.protectedResource(req, res));
   }
 }
 
