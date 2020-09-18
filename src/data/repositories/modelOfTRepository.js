@@ -21,6 +21,12 @@ class ModelOfTRepository extends RepositoryOfT {
     return this.Model.find(query);
   }
 
+  async getWithParent (query,parent,parentAttributes) {
+    // return this.Model.find(query).populate(parent);
+    return this.Model.find(query).populate(parent,parentAttributes);
+
+  }
+
 
   async count (query) {
     return this.Model.count(query);

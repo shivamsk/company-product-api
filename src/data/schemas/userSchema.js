@@ -25,7 +25,13 @@ const UserSchema = new Schema({
     type: Boolean,
     required: true,
     default: true
+  },
+  isDeleted: {
+    type: Boolean,
+    required: true,
+    default: true
   }
 });
 
 export default UserSchema;
+

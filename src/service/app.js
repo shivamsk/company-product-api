@@ -24,6 +24,11 @@ import RoleController from '../service/controllers/roleController';
 import RoleRouter from '../service/routes/roleRouter';
 
 
+import CategoryModel from '../data/models/categoryModel';
+import CategoryController from '../service/controllers/categoryController';
+import CategoryRouter from '../service/routes/categoryRouter';
+
+
 
 import {authenticated} from './middleware/middleware-security';
 
@@ -48,6 +53,11 @@ export default async function (logger,
   const roleController = new RoleController(roleRepository, logger);
   const roleRouter = new RoleRouter(roleController);
 
+  const categoryRepository = new ModelOfTRepository(CategoryModel(dbConnection));
+  const categoryController = new CategoryController(categoryRepository, logger);
+  const categoryRouter = new CategoryRouter(categoryController);
+
+
 
 
   middlewareLogging(app, logger);
@@ -59,6 +69,8 @@ export default async function (logger,
   apiRouter.use('/user', userRouter.Router);
   apiRouter.use('/role', roleRouter.Router);
   apiRouter.use('/product', authenticated(),productRouter.Router);
+  apiRouter.use('/category', authenticated(),categoryRouter.Router);
+
 
   app.use('/api', apiRouter);
 

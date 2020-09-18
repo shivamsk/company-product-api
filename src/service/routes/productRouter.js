@@ -36,7 +36,7 @@ class ProductRouter extends BaseRouter {
 
     this.Router.route('/:productId')
         .put(async (req, res) => {
-          console.log("#######Product Router : " + JSON.stringify(req.body));
+          console.log("$$$$$$$Product Update : " + JSON.stringify(req.body));
 
           console.log("#######Product User : " + JSON.stringify(req.user));
           console.log("#######Product User : " + JSON.stringify(req.params));

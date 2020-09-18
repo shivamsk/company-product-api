@@ -7,8 +7,8 @@ class RoleController extends ApiController {
     this._logger = logger;
   }
 
-  get ProductRepository() {
-    return this._productRepository;
+  get RoleRepository() {
+    return this._roleRepository;
   }
 
 
@@ -17,8 +17,8 @@ class RoleController extends ApiController {
 
       console.log("#######Role Controller : " + req);
 
-      const newProduct = await this._roleRepository.create(req.body);
-      this.httpCreated(res, Object.assign({}, newProduct.toJSON()));
+      const role = await this._roleRepository.create(req.body);
+      this.httpCreated(res, Object.assign({}, role.toJSON()));
     } catch (error) {
 
       this.httpInternalServerError(res, error.message);

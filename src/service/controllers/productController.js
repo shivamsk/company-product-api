@@ -22,6 +22,8 @@ class ProductController extends ApiController {
 
       req.body.sellerId = req.user._id;
       req.body.isDeleted = false;
+      req.body.productId = req.body.name;
+
       const newProduct = await this._productRepository.create(req.body);
       this.httpCreated(res, newProduct.toJSON());
     } catch (error) {
@@ -34,7 +36,7 @@ class ProductController extends ApiController {
     try {
 
       // console.log("#######Product Params : " + JSON.stringify(req.params));
-      this.Logger.info("Using Logger#######Product Params : " + JSON.stringify(req.params));
+      this.Logger.info("Using Logger#######Product Params : " , JSON.stringify(req.params));
       //const products = await this._productRepository.get({sellerId: req.user._id});
       const products = await this._productService.getProducts(req);
       this.httpOk(res, products);
@@ -69,9 +71,18 @@ class ProductController extends ApiController {
 
       console.log("#######Product Params : " + JSON.stringify(req.params));
 
+      let query = {
+        _id: req.params.productId,
+        isDeleted: false,
+      };
+
+      if (req.body.categoryId) {
+         req.body.category = req.body.categoryId;
+
+      }
       let updatedProduct = await this._productRepository.upsert({
             _id: req.params.productId,
-            isDeleted: false
+            isDeleted: false,
           },
           req.body);
       console.log("#######updatedProduct : " + updatedProduct);
