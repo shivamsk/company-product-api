@@ -1,7 +1,7 @@
 import morgan from 'morgan';
 
 // Custom morgan tokens
-morgan.token('content-type', req => req.headers['content-type']);
+morgan.token('content-type', (req) => req.headers['content-type']);
 morgan.token('content-length', (req, res) => res.get('Content-Length'));
 
 export default (app, logger) => {
@@ -11,8 +11,8 @@ export default (app, logger) => {
       stream: {
         write: (message) => {
           logger.info(message.trim());
-        }
-      }
-    }
+        },
+      },
+    },
   ));
 };

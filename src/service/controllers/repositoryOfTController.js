@@ -3,11 +3,11 @@ import ApiController from './apiController';
 class RepositoryOfTController extends ApiController {
   constructor(repositoryOfT) {
     super();
-    this._repositoryOfT = repositoryOfT;
+    this.repositoryOfT = repositoryOfT;
   }
 
   get Repository() {
-    return this._repositoryOfT;
+    return this.repositoryOfT;
   }
 
   async get(req, res) {
@@ -20,7 +20,7 @@ class RepositoryOfTController extends ApiController {
   }
 
   getById(req, res) {
-    this.httpOk(res, req._entity);
+    this.httpOk(res, req.entity);
   }
 
   async post(req, res) {
@@ -35,7 +35,7 @@ class RepositoryOfTController extends ApiController {
 
   async put(req, res) {
     try {
-      const updatedEntity = await this.Repository.update(req._entity, req.body);
+      const updatedEntity = await this.Repository.update(req.entity, req.body);
       this.httpOk(res, updatedEntity);
     } catch (error) {
       this.httpInternalServerError(res, error.message);
@@ -44,7 +44,7 @@ class RepositoryOfTController extends ApiController {
 
   async upsert(req, res) {
     try {
-      const updatedEntity = await this.Repository.update(req._entity, req.body, { upsert: true });
+      const updatedEntity = await this.Repository.update(req.entity, req.body, { upsert: true });
       this.httpOk(res, updatedEntity);
     } catch (error) {
       this.httpInternalServerError(res, error.message);
@@ -53,7 +53,7 @@ class RepositoryOfTController extends ApiController {
 
   async patch(req, res) {
     try {
-      const updatedEntity = await this.Repository.patch(req._entity, req.body);
+      const updatedEntity = await this.Repository.patch(req.entity, req.body);
       this.httpOk(res, updatedEntity);
     } catch (error) {
       this.httpInternalServerError(res, error.message);
@@ -62,7 +62,7 @@ class RepositoryOfTController extends ApiController {
 
   async remove(req, res) {
     try {
-      await this.Repository.remove(req._entity);
+      await this.Repository.remove(req.entity);
       this.httpNotContent(res);
     } catch (error) {
       this.httpInternalServerError(res, error.message);
@@ -70,7 +70,7 @@ class RepositoryOfTController extends ApiController {
   }
 
   async search(req, res) {
-    let query = this.Repository._get(req.body);
+    let query = this.Repository.get(req.body);
     if (req.query && req.query.orderBy) {
       query = query.sort(
         (
@@ -78,14 +78,11 @@ class RepositoryOfTController extends ApiController {
             ? req.query.orderBy
             : [req.query.orderBy]
         ).reduce(
-          (acc, prop) => (prop[0] === '-')
-            ? Object.assign({}, acc, {
-              [prop.slice(1)]: -1
-            })
-            : Object.assign({}, acc, {
-              [prop]: 1
-            })
-          , {})
+          (acc, prop) => ((prop[0] === '-')
+            ? ({ ...acc, [prop.slice(1)]: -1 })
+            : ({ ...acc, [prop]: 1 })),
+          {},
+        ),
       );
     }
     this.httpOk(res, await query);

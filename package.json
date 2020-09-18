@@ -1,12 +1,13 @@
 {
   "name": "talentica-product-api",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description": "Product API",
   "private": true,
+  "author": "Siva Krishna Merugu",
   "nodemonConfig": {
     "exec": "npm run dev",
     "watch": [
-      "src/*",
-      "public/*"
+      "src/*"
     ],
     "ignore": [
       "**/__tests__/**",
@@ -17,7 +18,6 @@
   "scripts": {
     "start": "npm run prod",
     "build": "npm-run-all clean transpile",
-    "prevserver": "node ./dist-server/bin/www",
     "server": "node ./dist-server/index",
     "dev": "NODE_ENV=development npm-run-all build server",
     "prod": "NODE_ENV=production npm-run-all build server",
@@ -35,6 +35,7 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "joi": "^17.2.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.5",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.4",

@@ -1,4 +1,5 @@
-import * as HttpStatus from '../../common/lib/httpStatusCodes';
+import * as HttpStatus from '../../common/httpStatusCodes';
+
 class ApiController {
   constructor() {
   }
@@ -33,15 +34,15 @@ class ApiController {
 
   sendResponse(response, code, data) {
     return response.status(code).json({
-      body: data
+      body: data,
     });
   }
 
   sendErrorResponse(response, code, error) {
     return response.status(code).json({
       error: {
-        message: error.message
-      }
+        message: error.message,
+      },
     });
   }
 }

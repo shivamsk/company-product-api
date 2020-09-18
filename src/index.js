@@ -1,31 +1,32 @@
-import "@babel/polyfill";
-
+import '@babel/polyfill';
 
 import application from './service/app';
-import initDb from './service/init/init-db';
-
+import initDb from './service/init/initDb';
 
 import dbConfig from '../config/development/db.json';
 import logConfig from '../config/development/log.json';
-// import corsConfig from '../config/development/cors.json';
 import securityConfig from '../config/development/security.json';
 
-// #region Common components
-import {getLogger} from './common/lib/logger';
-// #endregion
+import { logger } from './common/logger';
+
 const PORT = process.env.PORT || 5000;
+
 Promise.all([
+
   initDb(dbConfig.cnd)
+
 ]).then(async ([dbConnection]) => {
-  const logger = getLogger(logConfig);
-  // const app = await application(logger, dbConnection, corsConfig, securityConfig);
-  const app = await application(logger, dbConnection, null, securityConfig);
+
+  const app = await application(logger, dbConnection, securityConfig);
+
   app.listen(PORT, () => {
     logger.info(`Server started on port ${PORT}`);
   });
+
   process.on('SIGINT', async () => {
     await dbConnection.close();
   });
-}).catch(err => {
+
+}).catch((err) => {
   console.log('An error occurred while initializing the application.', err);
 });

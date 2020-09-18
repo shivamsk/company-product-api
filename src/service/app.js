@@ -1,52 +1,45 @@
 import express from 'express';
-import middlewareLogging from './middleware/middleware-logger';
-import middlewarePassport from './middleware/middleware-passport';
-import middlewareRequestParser from './middleware/middleware-request-parser';
+import middlewareLogging from './middleware/middlewareLogger';
+import middlewarePassport from './middleware/middlewarePassport';
+import middlewareRequestParser from './middleware/middlewareRequestParser';
+import { authenticated } from './middleware/middlewareSecurity';
 
 //  Common components
 import ModelOfTRepository from '../data/repositories/modelOfTRepository';
-// import middlewareCors from './middleware/middleware-cors';
 
 // User
 import UserModel from '../data/models/userModel';
-import UserController from '../service/controllers/userController';
-import UserRouter from '../service/routes/userRouter';
+import UserController from './controllers/userController';
+import UserRouter from './routes/userRouter';
 
 // Product
 import ProductModel from '../data/models/productModel';
-import ProductController from '../service/controllers/productController';
-import ProductRouter from '../service/routes/productRouter';
-import ProductService from '../service/productService';
-
+import ProductController from './controllers/productController';
+import ProductRouter from './routes/productRouter';
+import ProductService from './productService';
 
 import RoleModel from '../data/models/roleModel';
-import RoleController from '../service/controllers/roleController';
-import RoleRouter from '../service/routes/roleRouter';
-
+import RoleController from './controllers/roleController';
+import RoleRouter from './routes/roleRouter';
 
 import CategoryModel from '../data/models/categoryModel';
-import CategoryController from '../service/controllers/categoryController';
-import CategoryRouter from '../service/routes/categoryRouter';
+import CategoryController from './controllers/categoryController';
+import CategoryRouter from './routes/categoryRouter';
 
-
-
-import {authenticated} from './middleware/middleware-security';
 
 export default async function (logger,
-                               dbConnection,
-                               corsConfig,
-                               securityConfig) {
+  dbConnection,
+  securityConfig) {
   const app = express();
 
   const userRepository = new ModelOfTRepository(UserModel(dbConnection));
   const userController = new UserController(userRepository, logger);
   const userRouter = new UserRouter(userController);
 
-
   const productRepository = new ModelOfTRepository(ProductModel(dbConnection));
   const productService = new ProductService(productRepository);
 
-  const productController = new ProductController(productRepository,productService, logger);
+  const productController = new ProductController(productRepository, productService, logger);
   const productRouter = new ProductRouter(productController);
 
   const roleRepository = new ModelOfTRepository(RoleModel(dbConnection));
@@ -57,34 +50,26 @@ export default async function (logger,
   const categoryController = new CategoryController(categoryRepository, logger);
   const categoryRouter = new CategoryRouter(categoryController);
 
-
-
-
   middlewareLogging(app, logger);
   middlewareRequestParser(app);
   middlewarePassport(app, userRepository, securityConfig);
-  // middlewareCors(app, corsConfig);
 
   const apiRouter = express.Router();
   apiRouter.use('/user', userRouter.Router);
-  apiRouter.use('/role', roleRouter.Router);
-  apiRouter.use('/product', authenticated(),productRouter.Router);
-  apiRouter.use('/category', authenticated(),categoryRouter.Router);
-
+  apiRouter.use('/role', authenticated(),roleRouter.Router);
+  apiRouter.use('/product', authenticated(), productRouter.Router);
+  apiRouter.use('/category', authenticated(), categoryRouter.Router);
 
   app.use('/api', apiRouter);
 
   app.use((error, req, res, next) => {
-    console.log("ERRRORR USEE ");
     res.status(error.status || 500);
     res.json({
       error: {
-        message: error.message
-      }
+        message: error.message,
+      },
     });
   });
 
-
-  // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   return app;
 }

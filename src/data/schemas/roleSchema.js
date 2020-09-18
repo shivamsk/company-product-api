@@ -4,8 +4,8 @@ const RoleSchema = new Schema({
   name: {
     type: String,
     required: true,
-    maxLength: 512
-  }
+    maxLength: 512,
+  },
 });
 
 export default RoleSchema;

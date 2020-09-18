@@ -1,5 +1,5 @@
 import passport from 'passport';
-import {ExtractJwt, Strategy as JWTStrategy} from 'passport-jwt';
+import { ExtractJwt, Strategy as JWTStrategy } from 'passport-jwt';
 import jwt from 'jsonwebtoken';
 
 export default function (app, userRepository, securityConfig) {
@@ -7,15 +7,10 @@ export default function (app, userRepository, securityConfig) {
     secretOrKey: securityConfig.jwt.secret,
     issuer: securityConfig.jwt.issuer,
     audience: securityConfig.jwt.audience,
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   }, async (token, done) => {
     try {
-      console.log("##########JWTStrategy " + JSON.stringify(token));
-
-      const user = await userRepository.findOne({userName: token.sub});
-
-      console.log("##########UserByUserName" + JSON.stringify(token));
-
+      const user = await userRepository.findOne({ userName: token.sub });
 
       if (user && (user.isActive === true)) {
         done(null, user);

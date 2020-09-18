@@ -1,17 +1,17 @@
 import express from 'express';
 
 class BaseRouter {
-  constructor (controller) {
-    this._router = express.Router();
-    this._controller = controller;
+  constructor(controller) {
+    this.router = express.Router();
+    this.controller = controller;
   }
 
-  get Router () {
-    return this._router;
+  get Router() {
+    return this.router;
   }
 
-  get Controller () {
-    return this._controller;
+  get Controller() {
+    return this.controller;
   }
 }
 
