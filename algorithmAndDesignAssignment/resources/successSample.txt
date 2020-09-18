@@ -1,0 +1,12 @@
+2 soap @ 30.50
+1 potato chips packet @ 22.50
+1 music CD @ 250.59
+1 imported bottle of perfume @ 2100.99
+1 packet of crocin @ 19.75
+1 imported packet of blues @ 100
+2 AAA @ 30.50
+1 BBB chips packet @ 22.50
+1 CCC CD @ 250.59
+1 DDD bottle of perfume @ 2100.99
+1 EEE of crocin @ 19.75
+1 FFF packet of blues @ 100

@@ -1,0 +1,24 @@
+{
+  "name": "algorithm-design-assignment",
+  "version": "0.0.1",
+  "description": "algorithm-design-assignment",
+  "private": true,
+  "author": "Siva Krishna Merugu",
+  "scripts": {
+    "transpile": "babel ./src --out-dir dist",
+    "clean": "rimraf dist-server",
+    "dev": "npm-run-all clean transpile run",
+    "run": "node dist/index.js"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/polyfill": "^7.11.5",
+    "rimraf": "^3.0.2",
+    "npm-run-all": "^4.1.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-loader": "^8.1.0"
+  }
+}

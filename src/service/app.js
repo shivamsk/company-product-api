@@ -54,21 +54,13 @@ export default async function (logger,
   middlewarePassport(app, userRepository, securityConfig);
 
   const apiRouter = express.Router();
+  // authenticated(),
   apiRouter.use('/user', userRouter.Router);
-  apiRouter.use('/role', authenticated(), roleRouter.Router);
+  apiRouter.use('/role',  roleRouter.Router);
   apiRouter.use('/product', authenticated(), productRouter.Router);
   apiRouter.use('/category', authenticated(), categoryRouter.Router);
 
   app.use('/api', apiRouter);
-
-  // app.use((error, req, res, next) => {
-  //   res.status(error.status || 500);
-  //   res.json({
-  //     error: {
-  //       message: error.message,
-  //     },
-  //   });
-  // });
 
   return app;
 }

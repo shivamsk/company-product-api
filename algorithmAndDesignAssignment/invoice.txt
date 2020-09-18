@@ -1,0 +1,7 @@
+NAME                                               | QTY | UNIT_COST | COST
+potato chips packet                                | 1 | 22.5 | 22.5
+
+SubTotal: 22.5
+Value Added Tax: 0
+Additional Tax: 0
+Total: 22.5

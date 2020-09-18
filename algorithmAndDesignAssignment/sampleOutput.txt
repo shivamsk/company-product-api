@@ -1,0 +1,18 @@
+NAME                                               | QTY | UNIT_COST | COST
+soap                                               | 2 | 30.5 | 61
+potato chips packet                                | 1 | 22.5 | 22.5
+music CD                                           | 1 | 250.59 | 250.59
+imported bottle of perfume                         | 1 | 2100.99 | 2100.99
+packet of crocin                                   | 1 | 19.75 | 19.75
+imported packet of blues                           | 1 | 100 | 100
+AAA                                                | 2 | 30.5 | 61
+BBB chips packet                                   | 1 | 22.5 | 22.5
+CCC CD                                             | 1 | 250.59 | 250.59
+DDD bottle of perfume                              | 1 | 2100.99 | 2100.99
+EEE of crocin                                      | 1 | 19.75 | 19.75
+FFF packet of blues                                | 1 | 100 | 100
+
+SubTotal: 5109.66
+Value Added Tax: 630.9575
+Additional Tax: 52.82375999999999
+Total: 5793.4412600000005
