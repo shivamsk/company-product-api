@@ -19,9 +19,5 @@ public/
 logs
 *.log
 
-# ignore algorithmAndDesignAssignment
-#./algorithmAndDesignAssignment/node_modules
-#./algorithmAndDesignAssignment/dist
-
 
 dist/
