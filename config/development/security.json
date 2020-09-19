@@ -1,0 +1,7 @@
+{
+    "jwt": {
+        "secret": "tempSecretKey",
+        "issuer": "one-identity",
+        "audience": "audience-core"
+    }
+}

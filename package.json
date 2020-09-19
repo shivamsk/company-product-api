@@ -1,12 +1,13 @@
 {
   "name": "talentica-product-api",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description": "Product API",
   "private": true,
+  "author": "Siva Krishna Merugu",
   "nodemonConfig": {
     "exec": "npm run dev",
     "watch": [
-      "src/*",
-      "public/*"
+      "src/*"
     ],
     "ignore": [
       "**/__tests__/**",
@@ -17,29 +18,45 @@
   "scripts": {
     "start": "npm run prod",
     "build": "npm-run-all clean transpile",
-    "server": "node ./dist-server/bin/www",
+    "server": "node ./dist-server/index",
     "dev": "NODE_ENV=development npm-run-all build server",
     "prod": "NODE_ENV=production npm-run-all build server",
     "transpile": "babel ./src --out-dir dist-server",
     "clean": "rimraf dist-server",
     "watch:dev": "nodemon",
-    "test": "jest"
+    "test": "jest",
+    "lintfix": "eslint ./src/ --fix",
+    "lint": "eslint ./src/ --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'"
   },
   "dependencies": {
     "@babel/cli": "^7.11.6",
     "@babel/polyfill": "^7.11.5",
+    "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
-    "morgan": "~1.9.1",
+    "joi": "^17.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.5",
+    "morgan": "^1.9.1",
     "nodemon": "^2.0.4",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^3.0.2"
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "rimraf": "^3.0.2",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
     "babel-loader": "^8.1.0",
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-security": "^1.4.0",
     "jest": "^26.4.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
