@@ -1,5 +1,5 @@
 {
-    "cnd": {
-        "connection": "mongodb://localhost:27017/mongotest"
-    }
+  "cnd": {
+    "connection": "mongodb://localhost:27017/companyProductDB"
+  }
 }

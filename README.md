@@ -50,6 +50,9 @@ Design
 13. Used NoSQL Database as the components don't demand any ACID properties and so made use of the NoSQL denormalized structure.    
 14. Added Basic pagination
 
+Note: For the sake of running the application, I have added a dummy security config in 
+config/development/security.json and pushed it. 
+
 TODOs and Improvements 
 ---------------
 1. Setup the prod configuration and add docker image. 
