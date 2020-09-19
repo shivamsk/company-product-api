@@ -48,6 +48,7 @@ Design
 11. User entity is used as seller and the external user with the role permissions.
 12. Each Seller can have multiple products with the sellerId used in the product.  
 13. Used NoSQL Database as the components don't demand any ACID properties and so made use of the NoSQL denormalized structure.    
+14. Added Basic pagination
 
 TODOs and Improvements 
 ---------------
@@ -59,5 +60,5 @@ TODOs and Improvements
 6. Add Flow for type checks. 
 7. Need to improve linting and add more rules in eslint.
 8. Add code level comments and API documentation using swagger 
-
+9. Improve pagination query.
  
