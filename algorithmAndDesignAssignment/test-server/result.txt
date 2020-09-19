@@ -1,6 +1,0 @@
-NAME                                               | QTY | UNIT_COST | COST
-
-SubTotal: 0
-Value Added Tax: 0
-Additional Tax: 0
-Total: 0

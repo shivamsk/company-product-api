@@ -42,7 +42,7 @@ Design
 5. Each category can have multiple products ( category to products - 1 to many relation)
 6. Four entities used are : ROLE, USER,PRODUCT,CATEGORY.
 7. ROLE is an embedded object in the USER document. 
-8. Basic validations for the product is in place. 
+8. Basic validations for the product are in place. 
 9. Added passportjs for authentication middleware.
 10.Added eslint for code style checks. 
 11. User entity is used as seller and the external user with the role permissions.
