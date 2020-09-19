@@ -13,10 +13,12 @@ fileWriteService which finally writes it into invoice.txt file.
 6. If there are bad entries in the file, like @ is missing or the product or quantity is 
 not a number, that row is skipped and the error is logged. 
 7. But the remaining rows continue without stopping the process. 
+8. Used only the inbuilt nodejs components like path, filestream, readline. 
+9. Used babel to transpile. 
 
 
 
-Instructions to build
+Instructions to build and run
 ---------------
 
 ```sh
