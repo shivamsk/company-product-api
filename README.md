@@ -64,4 +64,5 @@ TODOs and Improvements
 7. Need to improve linting and add more rules in eslint.
 8. Add code level comments and API documentation using swagger 
 9. Improve pagination query.
+10. Add Salt and store passwords using bcrypt
  
